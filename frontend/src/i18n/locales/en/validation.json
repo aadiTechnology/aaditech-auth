@@ -1,0 +1,16 @@
+{
+  "required": "This field is required.",
+  "email": "Enter a valid email address.",
+  "passwordMismatch": "Passwords do not match.",
+  "fullNameMin": "Full name must be at least 2 characters.",
+  "TOO_SHORT": "Password must be at least {{count}} characters.",
+  "MISSING_UPPERCASE": "Password must contain an uppercase letter.",
+  "MISSING_LOWERCASE": "Password must contain a lowercase letter.",
+  "MISSING_NUMBER": "Password must contain a number.",
+  "MISSING_SPECIAL": "Password must contain a special character.",
+  "PASSWORD_MISMATCH": "Passwords do not match.",
+  "INVALID_EMAIL": "Enter a valid email address.",
+  "REQUIRED": "This field is required.",
+  "UNSUPPORTED_LANGUAGE": "Choose English, Marathi, or Hindi.",
+  "INVALID": "Invalid value."
+}

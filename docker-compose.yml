@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: onlinetution-postgres
+    environment:
+      POSTGRES_USER: onlinetution
+      POSTGRES_PASSWORD: onlinetution
+      POSTGRES_DB: onlinetution
+    ports:
+      - "5432:5432"
+    volumes:
+      - onlinetution_pg:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U onlinetution -d onlinetution"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  onlinetution_pg:

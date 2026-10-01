@@ -1,0 +1,31 @@
+{
+  "language": "Language",
+  "english": "English",
+  "marathi": "Marathi",
+  "hindi": "Hindi",
+  "loading": "Loading",
+  "save": "Save",
+  "cancel": "Cancel",
+  "close": "Close",
+  "notFound": "Page not found",
+  "notFoundDescription": "The page you requested does not exist.",
+  "goToLogin": "Go to sign in",
+  "goHome": "Go to home",
+  "unexpectedError": "Something went wrong. Please try again.",
+  "networkError": "Network error. Check your connection and try again.",
+  "errors": {
+    "INVALID_CREDENTIALS": "Invalid email or password.",
+    "ACCOUNT_INACTIVE": "This account is inactive.",
+    "EMAIL_ALREADY_EXISTS": "An account with this email already exists.",
+    "NETWORK_ERROR": "Network error. Check your connection and try again.",
+    "RATE_LIMITED": "Too many attempts. Please wait and try again.",
+    "INVALID_OR_EXPIRED_TOKEN": "This password reset link is invalid or has expired.",
+    "FORBIDDEN": "You do not have permission to perform this action.",
+    "UNAUTHENTICATED": "Please sign in again.",
+    "LAST_ADMIN": "The last active administrator cannot be changed.",
+    "CANNOT_MODIFY_OWN_ACCESS": "You cannot change your own access.",
+    "CSRF_VALIDATION_FAILED": "The page could not be verified. Refresh and try again.",
+    "VALIDATION_ERROR": "Please correct the highlighted fields.",
+    "REQUEST_FAILED": "The request could not be completed."
+  }
+}
