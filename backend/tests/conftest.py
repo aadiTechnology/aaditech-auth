@@ -2,11 +2,26 @@
 
 import os
 import time
+from urllib.parse import urlsplit, urlunsplit
+
+
+def _database_url(database_name: str) -> str:
+    """Use the local credentials from .env and select the named database."""
+    database_url = ""
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    with open(env_path, encoding="utf-8") as env_file:
+        for line in env_file:
+            if line.startswith("DATABASE_URL="):
+                database_url = line.split("=", 1)[1].strip()
+                break
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is missing from backend/.env")
+    parts = urlsplit(database_url)
+    return urlunsplit((parts.scheme, parts.netloc, f"/{database_name}", "", ""))
+
 
 os.environ["APP_ENV"] = "test"
-os.environ["DATABASE_URL"] = (
-    "postgresql+psycopg://onlinetution:onlinetution@localhost:5432/onlinetution_test"
-)
+os.environ["DATABASE_URL"] = _database_url("onlinetution_test")
 os.environ["JWT_SECRET"] = "test-jwt-secret-must-be-at-least-32"
 os.environ["CORS_ORIGINS"] = "http://localhost:5173"
 os.environ["COOKIE_SECURE"] = "false"
@@ -31,16 +46,14 @@ def _ensure_test_database() -> None:
     last_error: Exception | None = None
     for _ in range(30):
         try:
-            with psycopg.connect(
-                "postgresql://onlinetution:onlinetution@localhost:5432/postgres",
-                autocommit=True,
-            ) as conn:
+            admin_url = _database_url("postgres").replace("postgresql+psycopg://", "postgresql://", 1)
+            with psycopg.connect(admin_url, autocommit=True) as conn:
                 with conn.cursor() as cur:
                     cur.execute("SELECT 1 FROM pg_database WHERE datname = 'onlinetution_test'")
                     if cur.fetchone() is None:
-                        cur.execute("CREATE DATABASE onlinetution_test OWNER onlinetution")
+                        cur.execute("CREATE DATABASE onlinetution_test")
             return
-        except Exception as exc:  # noqa: BLE001 - wait for the database container
+        except Exception as exc:  # noqa: BLE001 - retry while PostgreSQL starts
             last_error = exc
             time.sleep(1)
     raise RuntimeError("PostgreSQL is not available for tests") from last_error

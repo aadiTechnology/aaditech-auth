@@ -11,17 +11,11 @@ This repository contains the authentication and role-based access foundation for
 
 - Python 3.12+
 - Node.js 22+
-- Docker, for the local PostgreSQL database
-
-PostgreSQL is published on port 5432 by Docker Compose. If another PostgreSQL instance already uses that port, stop it or change the compose port and `DATABASE_URL` together.
+- PostgreSQL listening on `localhost:5433`
 
 ## Start the database
 
-```powershell
-docker compose up -d
-```
-
-The database user, password, and database name in `.env.example` are local development defaults. Replace them before any shared or production deployment.
+Create a database named `onlinetution` on the local PostgreSQL server. Put the connection string in `backend/.env` as `DATABASE_URL`. The password is stored only in that file, which is gitignored. `@` in a password must be written as `%40` in the URL.
 
 ## Backend
 
