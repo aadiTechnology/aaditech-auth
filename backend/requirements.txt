@@ -1,0 +1,20 @@
+# Online Tuition backend environment (Python >= 3.12)
+# Install with: python -m pip install -r requirements.txt
+
+# Runtime
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy>=2.0.36
+alembic>=1.14
+psycopg[binary]>=3.2
+pydantic-settings>=2.6
+email-validator>=2.2
+pyjwt>=2.10
+argon2-cffi>=23.1
+
+# Development and tests
+pytest>=8.3
+pytest-asyncio>=0.24
+httpx>=0.28
+ruff>=0.8
+mypy>=1.13
