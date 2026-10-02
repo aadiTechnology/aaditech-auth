@@ -1,6 +1,15 @@
 @echo off
 cd /d "%~dp0"
-set ENV_FILE=.env.test
+if not exist .env (
+  if exist env (
+    echo Creating .env from env...
+    copy /Y env .env >nul
+  ) else (
+    echo Missing .env. Copy .env.example to .env and set DATABASE_URL, JWT_SECRET, and CORS_ORIGINS.
+    pause
+    exit /b 1
+  )
+)
 if exist venv (
   echo Removing existing virtual environment...
   REM rmdir /s /q venv

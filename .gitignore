@@ -2,6 +2,7 @@
 .env.*
 !.env.example
 backend/.env
+backend/env
 frontend/.env
 
 __pycache__/
