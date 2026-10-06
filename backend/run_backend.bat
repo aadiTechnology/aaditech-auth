@@ -20,5 +20,5 @@ call venv\Scripts\activate
 echo install requirement.txt
 pip install -r requirements.txt
 echo Starting FastAPI server (test)...
-uvicorn app.main:app --host 127.0.0.1 --port 8022
+uvicorn app.main:app --host 127.0.0.1 --port 8000
 pause
