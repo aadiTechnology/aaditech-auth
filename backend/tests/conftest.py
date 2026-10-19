@@ -76,10 +76,13 @@ def clean_database() -> None:
     with engine.begin() as connection:
         connection.execute(
             text(
-                "TRUNCATE TABLE audit_logs, password_reset_tokens, refresh_tokens, "
+                "TRUNCATE TABLE scheduled_classes, batch_students, batches, student_parents, "
+                "students, parents, audit_logs, password_reset_tokens, refresh_tokens, "
                 "user_roles, users CASCADE"
             )
         )
+        connection.execute(text("ALTER SEQUENCE student_code_seq RESTART WITH 1"))
+        connection.execute(text("ALTER SEQUENCE batch_code_seq RESTART WITH 1"))
     engine.dispose()
     from app.core.rate_limit import limiter
     from app.email.sender import get_memory_sender

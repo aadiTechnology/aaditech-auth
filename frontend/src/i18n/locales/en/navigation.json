@@ -1,5 +1,19 @@
 {
   "home": "Home",
+  "dashboard": "Dashboard",
+  "students": "Students",
+  "parents": "Parents",
+  "batches": "Batches",
+  "timetable": "Timetable",
+  "googleMeet": "Google Meet",
+  "attendance": "Attendance",
+  "fees": "Fees",
+  "receipts": "Receipts",
   "accessManagement": "Access management",
-  "mainNavigation": "Main navigation"
+  "accessDenied": "Access denied",
+  "comingSoon": "Coming soon",
+  "mainNavigation": "Main navigation",
+  "openNavigation": "Open navigation",
+  "closeNavigation": "Close navigation",
+  "accountMenu": "Account menu"
 }

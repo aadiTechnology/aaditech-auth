@@ -34,5 +34,13 @@
   "permission_users_delete": "Delete users",
   "permission_roles_read": "View roles",
   "permission_roles_assign": "Assign roles",
-  "permission_features_read": "Use the application"
+  "permission_features_read": "Use the application",
+  "permission_students_read": "View students",
+  "permission_students_create": "Create students",
+  "permission_students_update": "Update students",
+  "permission_students_archive": "Archive students",
+  "permission_parents_read": "View parents",
+  "permission_parents_create": "Create parents",
+  "permission_parents_update": "Update parents",
+  "permission_parents_archive": "Archive parents"
 }

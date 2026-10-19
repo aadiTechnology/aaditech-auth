@@ -21,6 +21,11 @@ SENSITIVE_KEYS = frozenset(
         "jwt",
         "jwt_secret",
         "smtp_password",
+        "phone",
+        "email",
+        "address",
+        "notes",
+        "date_of_birth",
     }
 )
 

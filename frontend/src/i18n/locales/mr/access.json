@@ -34,5 +34,13 @@
   "permission_users_delete": "वापरकर्ते हटवा",
   "permission_roles_read": "भूमिका पहा",
   "permission_roles_assign": "भूमिका द्या",
-  "permission_features_read": "अनुप्रयोग वापरा"
+  "permission_features_read": "अनुप्रयोग वापरा",
+  "permission_students_read": "विद्यार्थी पहा",
+  "permission_students_create": "विद्यार्थी तयार करा",
+  "permission_students_update": "विद्यार्थी अद्ययावत करा",
+  "permission_students_archive": "विद्यार्थी संग्रहित करा",
+  "permission_parents_read": "पालक पहा",
+  "permission_parents_create": "पालक तयार करा",
+  "permission_parents_update": "पालक अद्ययावत करा",
+  "permission_parents_archive": "पालक संग्रहित करा"
 }

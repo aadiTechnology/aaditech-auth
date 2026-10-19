@@ -1,0 +1,21 @@
+{
+  "subtitle": "तुमच्या कोचिंग वर्गांचा आढावा.",
+  "signedInAs": "{{name}} म्हणून प्रवेश केला",
+  "metricsHeading": "सारांश",
+  "notAvailable": "अद्याप उपलब्ध नाही",
+  "empty": "अद्याप नोंदी नाहीत",
+  "loadError": "हा सारांश लोड करता आला नाही.",
+  "emptyMetrics": "कोणताही सारांश उपलब्ध नाही.",
+  "loadingMetrics": "सारांश लोड होत आहे",
+  "cards": {
+    "students": "एकूण विद्यार्थी",
+    "batches": "एकूण बॅच",
+    "todayClasses": "आजचे वर्ग",
+    "pendingFees": "प्रलंबित फी"
+  },
+  "upcomingHeading": "येणारे वर्ग",
+  "upcomingEmpty": "कोणतेही वर्ग ठरवलेले नाहीत.",
+  "upcomingUnavailable": "येणारे वर्ग अद्याप उपलब्ध नाहीत.",
+  "upcomingError": "येणारे वर्ग लोड करता आले नाहीत.",
+  "classLink": "{{date}} {{time}} {{batch}}"
+}

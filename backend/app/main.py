@@ -11,6 +11,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import JSONResponse
 
 from app.auth.router import router as auth_router
+from app.batches.router import router as batches_router
 from app.common.exceptions import AppError, ErrorCode
 from app.common.responses import error_content
 from app.core.config import get_settings
@@ -18,8 +19,11 @@ from app.core.csrf import CSRFMiddleware
 from app.core.logging import configure_logging, log_event
 from app.core.security import dummy_password_hash
 from app.core.security_headers import SecurityHeadersMiddleware
+from app.parents.router import router as parents_router
 from app.permissions.router import router as permissions_router
 from app.roles.router import router as roles_router
+from app.students.router import router as students_router
+from app.timetable.router import router as timetable_router
 from app.users.router import router as users_router
 
 logger = logging.getLogger("app.main")
@@ -36,15 +40,39 @@ def _validation_details(exc: RequestValidationError) -> list[dict[str, str]]:
         if error_type == "missing":
             code = "REQUIRED"
             message = "This field is required."
+        elif error_type == "string_too_long":
+            code = "TOO_LONG"
+            message = "This value is too long."
+        elif "date" in error_type:
+            code = "INVALID_DATE"
+            message = "Enter a valid date."
         elif "email" in error_type or (field == "email" and error_type != "missing"):
             code = "INVALID_EMAIL"
             message = "Enter a valid email address."
+        elif field == "phone":
+            code = "INVALID_PHONE"
+            message = "Enter a valid phone number."
+        elif field == "grade":
+            code = "INVALID_GRADE"
+            message = "Choose a class from 1 to 12."
+        elif field == "status":
+            code = "INVALID_STATUS"
+            message = "Choose a valid status."
+        elif field == "relationship":
+            code = "INVALID_RELATIONSHIP"
+            message = "Choose a valid relationship."
         elif field == "full_name":
             code = "TOO_SHORT"
             message = "Full name must be at least 2 characters."
         elif field == "preferred_language":
             code = "UNSUPPORTED_LANGUAGE"
             message = "Language must be English, Marathi, or Hindi."
+        elif "time" in error_type or (field in {"start_time", "end_time"} and error_type != "missing"):
+            code = "INVALID_TIME"
+            message = "Enter a valid time."
+        elif field == "weekdays" or field.startswith("weekdays"):
+            code = "INVALID_WEEKDAY"
+            message = "Choose each weekday once."
         details.append({"field": field, "code": code, "message": message})
     return details
 
@@ -63,11 +91,13 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Online Tuition API",
         version="0.1.0",
-        summary="Authentication and role-based access API",
+        summary="Online Tuition API",
         description=(
-            "Cookie-based authentication foundation. Access and refresh tokens are HttpOnly cookies. "
+            "Cookie-based authentication. Access and refresh tokens are HttpOnly cookies. "
             "Authorization uses database roles and permissions. "
-            "Unsafe requests require an X-CSRF-Token header matching the csrf_token cookie."
+            "Unsafe requests require an X-CSRF-Token header matching the csrf_token cookie. "
+            "Student and parent records are class-register data and are separate from login accounts. "
+            "Class dates and times use Asia/Kolkata wall-clock values."
         ),
         docs_url="/api/docs",
         redoc_url="/api/redoc",
@@ -125,6 +155,10 @@ def create_app() -> FastAPI:
     app.include_router(users_router, prefix="/api/v1/users", tags=["Users"])
     app.include_router(roles_router, prefix="/api/v1/roles", tags=["Roles"])
     app.include_router(permissions_router, prefix="/api/v1/permissions", tags=["Permissions"])
+    app.include_router(students_router, prefix="/api/v1/students", tags=["Students"])
+    app.include_router(parents_router, prefix="/api/v1/parents", tags=["Parents"])
+    app.include_router(batches_router, prefix="/api/v1/batches", tags=["Batches"])
+    app.include_router(timetable_router, prefix="/api/v1/timetable", tags=["Timetable"])
     return app
 
 

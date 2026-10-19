@@ -1,6 +1,8 @@
-# Online Tuition authentication foundation
+# Online Tuition
 
-This repository contains the authentication and role-based access foundation for Online Tuition. It does not include classes, attendance, fees, or other ERP features.
+This repository contains the Online Tuition coaching application.
+
+Sprint 1 provides sign-in, roles, and the dashboard shell. Sprint 2 adds the class register for students and parents. A login account is separate from a student or parent record. Public registration still creates a `STUDENT` login and does not add anyone to the class register.
 
 ## Applications
 
@@ -57,7 +59,9 @@ The app runs at `http://localhost:5173`. Open that host, not `127.0.0.1`, when `
 - Password reset tokens are random, stored only as a SHA-256 hash, expire, and cannot be reused. A successful reset increments the session version and revokes refresh tokens.
 - Passwords are hashed with Argon2id.
 
-Authorization is permission-based. `ADMIN`, `TEACHER`, and `STUDENT` are database roles. Administrators receive the initial permission set. Teachers and students receive only `features.read` until an administrator changes their role. A user cannot change their own role or status.
+Authorization is permission-based. `ADMIN`, `TEACHER`, and `STUDENT` are database roles. Administrators and teachers can manage student and parent records. Students receive only `features.read` until an administrator changes their role. A user cannot change their own role or status.
+
+Apply new database revisions with `.\.venv\Scripts\python.exe -m alembic upgrade head` from `backend/`. Revision `0002_students_parents` adds the student and parent tables. Revision `0003_batches_timetable` adds batches, student enrollment, scheduled classes, and their permissions. Neither revision deletes existing accounts.
 
 ## Checks
 

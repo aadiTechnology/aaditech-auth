@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Link as MuiLink, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Button, Checkbox, FormControlLabel, Link as MuiLink, Stack, TextField, Typography } from '@mui/material'
 import { FormEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -80,17 +80,16 @@ export function LoginPage() {
         disabled={submitting}
         onChange={setPassword}
       />
-      <Box>
-        <label>
-          <input
-            type="checkbox"
+      <FormControlLabel
+        control={
+          <Checkbox
             checked={rememberMe}
             onChange={(event) => setRememberMe(event.target.checked)}
             disabled={submitting}
-          />{' '}
-          {t('auth:rememberMe')}
-        </label>
-      </Box>
+          />
+        }
+        label={t('auth:rememberMe')}
+      />
       <Button type="submit" variant="contained" disabled={submitting}>
         {submitting ? t('auth:submitting') : t('auth:signIn')}
       </Button>

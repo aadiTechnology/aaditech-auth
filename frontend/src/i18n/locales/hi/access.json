@@ -34,5 +34,13 @@
   "permission_users_delete": "उपयोगकर्ता हटाएँ",
   "permission_roles_read": "भूमिकाएँ देखें",
   "permission_roles_assign": "भूमिकाएँ सौंपें",
-  "permission_features_read": "अनुप्रयोग का उपयोग करें"
+  "permission_features_read": "अनुप्रयोग का उपयोग करें",
+  "permission_students_read": "छात्र देखें",
+  "permission_students_create": "छात्र बनाएँ",
+  "permission_students_update": "छात्र अपडेट करें",
+  "permission_students_archive": "छात्र संग्रहित करें",
+  "permission_parents_read": "अभिभावक देखें",
+  "permission_parents_create": "अभिभावक बनाएँ",
+  "permission_parents_update": "अभिभावक अपडेट करें",
+  "permission_parents_archive": "अभिभावक संग्रहित करें"
 }

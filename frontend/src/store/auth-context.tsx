@@ -71,9 +71,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const logout = useCallback(async () => {
-    await api.post<undefined>('/api/v1/auth/logout')
-    setUser(null)
-    setStatus('unauthenticated')
+    try {
+      await api.post<undefined>('/api/v1/auth/logout')
+    } catch {
+      // A failed request can leave the server session in place.
+      // Local state is still cleared so the interface does not stay signed in.
+    } finally {
+      setUser(null)
+      setStatus('unauthenticated')
+    }
   }, [])
 
   const value = useMemo(

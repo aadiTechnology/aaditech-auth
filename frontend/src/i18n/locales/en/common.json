@@ -26,6 +26,13 @@
     "CANNOT_MODIFY_OWN_ACCESS": "You cannot change your own access.",
     "CSRF_VALIDATION_FAILED": "The page could not be verified. Refresh and try again.",
     "VALIDATION_ERROR": "Please correct the highlighted fields.",
-    "REQUEST_FAILED": "The request could not be completed."
+    "REQUEST_FAILED": "The request could not be completed.",
+    "NOT_FOUND": "That record could not be found.",
+    "CONFLICT": "This change conflicts with the current record.",
+    "STALE_UPDATE": "This record was changed somewhere else. Reload and try again.",
+    "DUPLICATE_LINK": "This parent is already linked to this student.",
+    "DUPLICATE_ASSIGNMENT": "This student is already assigned to this batch.",
+    "SCHEDULE_CONFLICT": "This class overlaps another class for the same batch.",
+    "NOT_ACTIVE": "Classes can only be scheduled for an active batch."
   }
 }

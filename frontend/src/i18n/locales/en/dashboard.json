@@ -1,0 +1,21 @@
+{
+  "subtitle": "Overview of your coaching classes.",
+  "signedInAs": "Signed in as {{name}}",
+  "metricsHeading": "Summary",
+  "notAvailable": "Not available yet",
+  "empty": "No records yet",
+  "loadError": "This summary could not be loaded.",
+  "emptyMetrics": "No summary items are available.",
+  "loadingMetrics": "Loading summary",
+  "cards": {
+    "students": "Total Students",
+    "batches": "Total Batches",
+    "todayClasses": "Today's Classes",
+    "pendingFees": "Pending Fees"
+  },
+  "upcomingHeading": "Upcoming classes",
+  "upcomingEmpty": "No classes are scheduled.",
+  "upcomingUnavailable": "Upcoming classes are not available yet.",
+  "upcomingError": "Upcoming classes could not be loaded.",
+  "classLink": "{{date}} {{time}} {{batch}}"
+}

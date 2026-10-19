@@ -1,5 +1,19 @@
 {
   "home": "होम",
+  "dashboard": "डैशबोर्ड",
+  "students": "छात्र",
+  "parents": "अभिभावक",
+  "batches": "बैच",
+  "timetable": "समय सारणी",
+  "googleMeet": "Google Meet",
+  "attendance": "हाजिरी",
+  "fees": "फीस",
+  "receipts": "रसीदें",
   "accessManagement": "पहुँच प्रबंधन",
-  "mainNavigation": "मुख्य नेविगेशन"
+  "accessDenied": "पहुँच अस्वीकृत",
+  "comingSoon": "जल्द आ रहा है",
+  "mainNavigation": "मुख्य नेविगेशन",
+  "openNavigation": "नेविगेशन खोलें",
+  "closeNavigation": "नेविगेशन बंद करें",
+  "accountMenu": "खाता मेनू"
 }

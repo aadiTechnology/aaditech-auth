@@ -12,5 +12,20 @@
   "INVALID_EMAIL": "Enter a valid email address.",
   "REQUIRED": "This field is required.",
   "UNSUPPORTED_LANGUAGE": "Choose English, Marathi, or Hindi.",
-  "INVALID": "Invalid value."
+  "INVALID": "Invalid value.",
+  "TOO_LONG": "This value is too long.",
+  "INVALID_PHONE": "Enter a valid 10-digit mobile number.",
+  "INVALID_DATE": "Enter a valid date.",
+  "INVALID_GRADE": "Choose a class from 1 to 12.",
+  "INVALID_STATUS": "Choose a valid status.",
+  "INVALID_RELATIONSHIP": "Choose a valid relationship.",
+  "NAME_TOO_SHORT": "Full name must be at least 2 characters.",
+  "MIN_LENGTH": "Enter at least 2 characters.",
+  "END_BEFORE_START": "End time must be later than the start time.",
+  "INVALID_TIME": "Enter a valid time.",
+  "SCHEDULE_CONFLICT": "This time overlaps another class for the same batch.",
+  "INVALID_WEEKDAY": "Choose each weekday once.",
+  "TOO_MANY": "Choose a shorter range. At most 60 classes can be created at once.",
+  "NO_OCCURRENCES": "No classes fall on the selected weekdays in this date range.",
+  "DUPLICATE": "Each student can be selected once."
 }

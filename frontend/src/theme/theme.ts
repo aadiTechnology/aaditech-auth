@@ -19,6 +19,7 @@ export const theme = createTheme({
   typography: {
     fontFamily: '"Segoe UI", "Noto Sans", "Noto Sans Devanagari", sans-serif',
     h1: { fontSize: '1.75rem', fontWeight: 700 },
+    h2: { fontSize: '1.25rem', fontWeight: 700 },
   },
   shape: { borderRadius: 12 },
   components: {
@@ -29,6 +30,8 @@ export const theme = createTheme({
     },
     MuiIconButton: { styleOverrides: { root: focusRing } },
     MuiLink: { styleOverrides: { root: focusRing } },
+    MuiListItemButton: { styleOverrides: { root: focusRing } },
+    MuiCheckbox: { styleOverrides: { root: focusRing } },
     MuiCssBaseline: {
       styleOverrides: {
         body: { margin: 0 },

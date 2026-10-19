@@ -91,12 +91,12 @@ export function AccessManagementPage() {
   }
 
   if (loading && users.length === 0) {
-    return <LoadingScreen />
+    return <LoadingScreen variant="section" />
   }
 
   return (
     <Stack spacing={3}>
-      <Typography variant="h1">{t('access:title')}</Typography>
+      <Typography variant="h2">{t('access:title')}</Typography>
       <Typography color="text.secondary">{t('access:description')}</Typography>
       {notice ? <Alert severity="success">{notice}</Alert> : null}
       {error ? <ErrorAlert message={error} /> : null}
