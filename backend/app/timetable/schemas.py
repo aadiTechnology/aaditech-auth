@@ -5,6 +5,7 @@ from datetime import date, datetime, time
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from app.meet.urls import meet_link_status
 from app.timetable.models import ScheduledClass
 
 
@@ -72,6 +73,18 @@ class RecurringCreate(BaseModel):
         return value
 
 
+class MeetLinkUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    version: int = Field(ge=1)
+    meet_url: str | None = Field(default=None, max_length=300)
+
+    @field_validator("meet_url", mode="before")
+    @classmethod
+    def blank(cls, value: object) -> object:
+        return _blank_to_none(value)
+
+
 class ScheduledClassItem(BaseModel):
     id: str
     batch_id: str
@@ -82,6 +95,8 @@ class ScheduledClassItem(BaseModel):
     end_time: time
     topic: str | None
     status: str
+    meet_url: str | None
+    meet_status: str
 
 
 class ScheduledClassDetail(ScheduledClassItem):
@@ -116,10 +131,13 @@ class UpcomingClass(BaseModel):
     start_time: time
     end_time: time
     topic: str | None
+    meet_url: str | None
+    meet_status: str
 
 
 class TimetableSummary(BaseModel):
     today_count: int
+    today: list[UpcomingClass]
     upcoming: list[UpcomingClass]
 
 
@@ -134,6 +152,8 @@ def to_class_item(item: ScheduledClass) -> ScheduledClassItem:
         end_time=item.end_time,
         topic=item.topic,
         status=item.status,
+        meet_url=item.meet_url,
+        meet_status=meet_link_status(item.meet_url),
     )
 
 
@@ -149,6 +169,8 @@ def to_class_detail(item: ScheduledClass) -> ScheduledClassDetail:
         topic=item.topic,
         notes=item.notes,
         status=item.status,
+        meet_url=item.meet_url,
+        meet_status=meet_link_status(item.meet_url),
         version=item.version,
         cancelled_at=item.cancelled_at,
     )
@@ -164,4 +186,6 @@ def to_upcoming(item: ScheduledClass) -> UpcomingClass:
         start_time=item.start_time,
         end_time=item.end_time,
         topic=item.topic,
+        meet_url=item.meet_url,
+        meet_status=meet_link_status(item.meet_url),
     )

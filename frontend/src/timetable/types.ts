@@ -8,6 +8,8 @@ export interface ScheduledClassItem {
   end_time: string
   topic: string | null
   status: string
+  meet_url: string | null
+  meet_status: 'added' | 'missing'
 }
 
 export interface ScheduledClassDetail extends ScheduledClassItem {
@@ -35,6 +37,18 @@ export interface PreviewData {
 
 export interface TimetableSummary {
   today_count: number
+  today?: Array<{
+    id: string
+    batch_id: string
+    batch_name: string
+    batch_code: string
+    class_date: string
+    start_time: string
+    end_time: string
+    topic: string | null
+    meet_url?: string | null
+    meet_status?: 'added' | 'missing'
+  }>
   upcoming: Array<{
     id: string
     batch_id: string
@@ -44,6 +58,8 @@ export interface TimetableSummary {
     start_time: string
     end_time: string
     topic: string | null
+    meet_url?: string | null
+    meet_status?: 'added' | 'missing'
   }>
 }
 

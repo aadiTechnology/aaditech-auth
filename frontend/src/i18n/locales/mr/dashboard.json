@@ -17,5 +17,19 @@
   "upcomingEmpty": "कोणतेही वर्ग ठरवलेले नाहीत.",
   "upcomingUnavailable": "येणारे वर्ग अद्याप उपलब्ध नाहीत.",
   "upcomingError": "येणारे वर्ग लोड करता आले नाहीत.",
-  "classLink": "{{date}} {{time}} {{batch}}"
+  "classLink": "{{date}} {{time}} {{batch}}",
+  "linkAdded": "दुवा जोडला",
+  "linkMissing": "दुवा नाही",
+  "joinMeeting": "मीटिंगमध्ये सामील व्हा",
+  "todayHeading": "आजचे वर्ग",
+  "todayEmpty": "आज कोणताही वर्ग ठरवलेला नाही.",
+  "todayUnavailable": "आजचे वर्ग अद्याप उपलब्ध नाहीत.",
+  "todayError": "आजचे वर्ग लोड करता आले नाहीत.",
+  "missingLinks_one": "आज १ वर्गाचा मीटिंग दुवा नाही.",
+  "missingLinks_other": "आज {{count}} वर्गांचे मीटिंग दुवे नाहीत.",
+  "attendanceHeading": "आजची हजेरी",
+  "attendanceLink": "{{batch}} {{time}} · {{status}}",
+  "attendanceEmpty": "आजच्या वर्गांसाठी हजेरी शिल्लक नाही.",
+  "attendanceUnavailable": "हजेरीची स्थिती अद्याप उपलब्ध नाही.",
+  "attendanceError": "हजेरीची स्थिती लोड करता आली नाही."
 }

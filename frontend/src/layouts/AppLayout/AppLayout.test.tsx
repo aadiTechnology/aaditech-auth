@@ -68,10 +68,12 @@ describe('AppLayout', () => {
     expect(screen.getByRole('navigation', { name: 'Main navigation' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Dashboard' })).toHaveAttribute('href', '/app')
     expect(screen.getByRole('heading', { name: 'Dashboard' })).toBeInTheDocument()
-    for (const name of ['Google Meet', 'Attendance', 'Fees', 'Receipts']) {
+    for (const name of ['Fees', 'Receipts']) {
       expect(screen.getByRole('button', { name: new RegExp(name, 'i') })).toHaveAttribute('aria-disabled', 'true')
     }
-    expect(screen.getAllByText('Coming soon')).toHaveLength(4)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(2)
+    expect(screen.queryByRole('link', { name: 'Google Meet' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Attendance' })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: 'Batches' })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: 'Timetable' })).not.toBeInTheDocument()
     expect(screen.queryByRole('link', { name: 'Students' })).not.toBeInTheDocument()
@@ -83,12 +85,14 @@ describe('AppLayout', () => {
     const user = userEvent.setup()
     renderLayout({
       ...teacher,
-      permissions: ['features.read', 'students.read', 'parents.read', 'batches.read', 'timetable.read'],
+      permissions: ['features.read', 'students.read', 'parents.read', 'batches.read', 'timetable.read', 'meet.read', 'attendance.read'],
     })
     expect(screen.getByRole('link', { name: 'Students' })).toHaveAttribute('href', '/app/students')
     expect(screen.getByRole('link', { name: 'Parents' })).toHaveAttribute('href', '/app/parents')
     expect(screen.getByRole('link', { name: 'Batches' })).toHaveAttribute('href', '/app/batches')
     expect(screen.getByRole('link', { name: 'Timetable' })).toHaveAttribute('href', '/app/timetable')
+    expect(screen.getByRole('link', { name: 'Google Meet' })).toHaveAttribute('href', '/app/meet')
+    expect(screen.getByRole('link', { name: 'Attendance' })).toHaveAttribute('href', '/app/attendance')
     await user.click(screen.getByRole('link', { name: 'Students' }))
     expect(screen.getByText('Students content')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Students' })).toBeInTheDocument()

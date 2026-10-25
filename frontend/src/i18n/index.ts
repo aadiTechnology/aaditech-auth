@@ -3,30 +3,36 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import enAccess from './locales/en/access.json'
+import enAttendance from './locales/en/attendance.json'
 import enAuth from './locales/en/auth.json'
 import enBatches from './locales/en/batches.json'
 import enCommon from './locales/en/common.json'
 import enDashboard from './locales/en/dashboard.json'
+import enMeet from './locales/en/meet.json'
 import enNavigation from './locales/en/navigation.json'
 import enParents from './locales/en/parents.json'
 import enStudents from './locales/en/students.json'
 import enTimetable from './locales/en/timetable.json'
 import enValidation from './locales/en/validation.json'
 import hiAccess from './locales/hi/access.json'
+import hiAttendance from './locales/hi/attendance.json'
 import hiAuth from './locales/hi/auth.json'
 import hiBatches from './locales/hi/batches.json'
 import hiCommon from './locales/hi/common.json'
 import hiDashboard from './locales/hi/dashboard.json'
+import hiMeet from './locales/hi/meet.json'
 import hiNavigation from './locales/hi/navigation.json'
 import hiParents from './locales/hi/parents.json'
 import hiStudents from './locales/hi/students.json'
 import hiTimetable from './locales/hi/timetable.json'
 import hiValidation from './locales/hi/validation.json'
 import mrAccess from './locales/mr/access.json'
+import mrAttendance from './locales/mr/attendance.json'
 import mrAuth from './locales/mr/auth.json'
 import mrBatches from './locales/mr/batches.json'
 import mrCommon from './locales/mr/common.json'
 import mrDashboard from './locales/mr/dashboard.json'
+import mrMeet from './locales/mr/meet.json'
 import mrNavigation from './locales/mr/navigation.json'
 import mrParents from './locales/mr/parents.json'
 import mrStudents from './locales/mr/students.json'
@@ -44,7 +50,9 @@ void i18n.use(LanguageDetector).use(initReactI18next).init({
       common: enCommon,
       navigation: enNavigation,
       access: enAccess,
+      attendance: enAttendance,
       dashboard: enDashboard,
+      meet: enMeet,
       students: enStudents,
       parents: enParents,
       batches: enBatches,
@@ -56,7 +64,9 @@ void i18n.use(LanguageDetector).use(initReactI18next).init({
       common: mrCommon,
       navigation: mrNavigation,
       access: mrAccess,
+      attendance: mrAttendance,
       dashboard: mrDashboard,
+      meet: mrMeet,
       students: mrStudents,
       parents: mrParents,
       batches: mrBatches,
@@ -68,7 +78,9 @@ void i18n.use(LanguageDetector).use(initReactI18next).init({
       common: hiCommon,
       navigation: hiNavigation,
       access: hiAccess,
+      attendance: hiAttendance,
       dashboard: hiDashboard,
+      meet: hiMeet,
       students: hiStudents,
       parents: hiParents,
       batches: hiBatches,
@@ -77,7 +89,20 @@ void i18n.use(LanguageDetector).use(initReactI18next).init({
   },
   fallbackLng: 'en',
   supportedLngs: [...supportedLanguages],
-  ns: ['common', 'auth', 'validation', 'navigation', 'access', 'dashboard', 'students', 'parents', 'batches', 'timetable'],
+  ns: [
+    'common',
+    'auth',
+    'validation',
+    'navigation',
+    'access',
+    'dashboard',
+    'students',
+    'parents',
+    'batches',
+    'timetable',
+    'meet',
+    'attendance',
+  ],
   defaultNS: 'common',
   interpolation: { escapeValue: false },
   detection: {

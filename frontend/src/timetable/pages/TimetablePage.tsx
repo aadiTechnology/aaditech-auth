@@ -10,13 +10,15 @@ import { LoadingScreen } from '../../components/common/LoadingScreen'
 import { formatClock, formatDisplayDate, isIsoDate } from '../../roster/format'
 import { listBatches } from '../../batches/api'
 import type { BatchListItem } from '../../batches/types'
+import { MeetJoinLink } from '../../meet/components/MeetJoinLink'
+import { MeetLinkDialog } from '../../meet/components/MeetLinkDialog'
 import { ClassDialog } from '../components/ClassDialog'
 import { listClasses } from '../api'
 import type { ScheduledClassItem } from '../types'
 import { addDays, coachingToday, startOfWeek, weekDates } from '../week'
 
 export function TimetablePage() {
-  const { t } = useTranslation(['timetable', 'common'])
+  const { t } = useTranslation(['timetable', 'meet', 'common'])
   const { hasPermission } = usePermission()
   const [params, setParams] = useSearchParams()
   const focus = params.get('date')
@@ -33,6 +35,7 @@ export function TimetablePage() {
   const [refreshKey, setRefreshKey] = useState(0)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [meetClassId, setMeetClassId] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -211,31 +214,43 @@ export function TimetablePage() {
                   </Typography>
                 ) : null}
                 {dayItems.map((item) => (
-                  <Button
-                    key={item.id}
-                    variant="outlined"
-                    onClick={() => {
-                      setEditingId(item.id)
-                      setDialogOpen(true)
-                    }}
-                    sx={{
-                      justifyContent: 'flex-start',
-                      textAlign: 'left',
-                      textTransform: 'none',
-                      textDecoration: item.status === 'cancelled' ? 'line-through' : 'none',
-                    }}
-                  >
-                    <Stack spacing={0.25} sx={{ alignItems: 'flex-start' }}>
-                      <Typography variant="body2">
-                        {formatClock(item.start_time)}–{formatClock(item.end_time)}
-                      </Typography>
-                      <Typography variant="body2">{item.batch_name}</Typography>
-                      {item.topic ? <Typography variant="caption">{item.topic}</Typography> : null}
-                      {item.status === 'cancelled' ? (
-                        <Typography variant="caption">{t('timetable:statusCancelled')}</Typography>
+                  <Stack key={item.id} spacing={0.5}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => {
+                        setEditingId(item.id)
+                        setDialogOpen(true)
+                      }}
+                      sx={{
+                        justifyContent: 'flex-start',
+                        textAlign: 'left',
+                        textTransform: 'none',
+                        textDecoration: item.status === 'cancelled' ? 'line-through' : 'none',
+                      }}
+                    >
+                      <Stack spacing={0.25} sx={{ alignItems: 'flex-start' }}>
+                        <Typography variant="body2">
+                          {formatClock(item.start_time)}–{formatClock(item.end_time)}
+                        </Typography>
+                        <Typography variant="body2">{item.batch_name}</Typography>
+                        {item.topic ? <Typography variant="caption">{item.topic}</Typography> : null}
+                        <Typography variant="caption">
+                          {item.meet_status === 'added' ? t('meet:linkAdded') : t('meet:linkMissing')}
+                        </Typography>
+                        {item.status === 'cancelled' ? (
+                          <Typography variant="caption">{t('timetable:statusCancelled')}</Typography>
+                        ) : null}
+                      </Stack>
+                    </Button>
+                    <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }}>
+                      <MeetJoinLink url={item.meet_url} label={t('meet:join')} />
+                      {hasPermission('meet.update') && item.status !== 'cancelled' ? (
+                        <Button size="small" onClick={() => setMeetClassId(item.id)}>
+                          {item.meet_url ? t('meet:editLink') : t('meet:addLink')}
+                        </Button>
                       ) : null}
                     </Stack>
-                  </Button>
+                  </Stack>
                 ))}
               </Stack>
             )
@@ -249,6 +264,15 @@ export function TimetablePage() {
         defaultDate={days.includes(today) ? today : weekStart}
         defaultBatchId={batchId}
         onClose={() => setDialogOpen(false)}
+        onSaved={(message) => {
+          setNotice(message)
+          setRefreshKey((current) => current + 1)
+        }}
+      />
+      <MeetLinkDialog
+        open={Boolean(meetClassId)}
+        classId={meetClassId}
+        onClose={() => setMeetClassId(null)}
         onSaved={(message) => {
           setNotice(message)
           setRefreshKey((current) => current + 1)

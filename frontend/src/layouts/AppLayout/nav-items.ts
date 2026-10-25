@@ -25,8 +25,8 @@ export const primaryNavItems: AppNavItem[] = [
   { id: 'parents', labelKey: 'parents', icon: SupervisorAccountOutlinedIcon, to: '/app/parents', permission: 'parents.read' },
   { id: 'batches', labelKey: 'batches', icon: GroupsOutlinedIcon, to: '/app/batches', permission: 'batches.read' },
   { id: 'timetable', labelKey: 'timetable', icon: CalendarMonthOutlinedIcon, to: '/app/timetable', permission: 'timetable.read' },
-  { id: 'googleMeet', labelKey: 'googleMeet', icon: VideoCallOutlinedIcon, comingSoon: true },
-  { id: 'attendance', labelKey: 'attendance', icon: FactCheckOutlinedIcon, comingSoon: true },
+  { id: 'googleMeet', labelKey: 'googleMeet', icon: VideoCallOutlinedIcon, to: '/app/meet', permission: 'meet.read' },
+  { id: 'attendance', labelKey: 'attendance', icon: FactCheckOutlinedIcon, to: '/app/attendance', permission: 'attendance.read' },
   { id: 'fees', labelKey: 'fees', icon: PaymentsOutlinedIcon, comingSoon: true },
   { id: 'receipts', labelKey: 'receipts', icon: ReceiptLongOutlinedIcon, comingSoon: true },
 ]
@@ -69,6 +69,12 @@ export function pageTitleKey(pathname: string) {
   }
   if (pathname.startsWith('/app/timetable')) {
     return 'timetable'
+  }
+  if (pathname.startsWith('/app/meet')) {
+    return 'googleMeet'
+  }
+  if (pathname.startsWith('/app/attendance')) {
+    return 'attendance'
   }
   return 'dashboard'
 }

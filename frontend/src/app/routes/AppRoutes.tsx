@@ -15,6 +15,8 @@ import { AuthLayout } from '../../layouts/AuthLayout/AuthLayout'
 import { BatchDetailPage } from '../../batches/pages/BatchDetailPage'
 import { BatchFormPage } from '../../batches/pages/BatchFormPage'
 import { BatchListPage } from '../../batches/pages/BatchListPage'
+import { AttendancePage } from '../../attendance/pages/AttendancePage'
+import { MeetPage } from '../../meet/pages/MeetPage'
 import { ParentDetailPage } from '../../parents/pages/ParentDetailPage'
 import { ParentFormPage } from '../../parents/pages/ParentFormPage'
 import { ParentListPage } from '../../parents/pages/ParentListPage'
@@ -146,6 +148,22 @@ export function AppRoutes() {
           element={
             <PermissionRoute permission="timetable.read">
               <TimetablePage />
+            </PermissionRoute>
+          }
+        />
+        <Route
+          path="meet"
+          element={
+            <PermissionRoute permission="meet.read">
+              <MeetPage />
+            </PermissionRoute>
+          }
+        />
+        <Route
+          path="attendance"
+          element={
+            <PermissionRoute permission="attendance.read">
+              <AttendancePage />
             </PermissionRoute>
           }
         />

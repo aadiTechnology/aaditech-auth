@@ -53,6 +53,10 @@ describe('DashboardPage', () => {
       ],
       upcoming: [],
       upcomingStatus: 'unavailable',
+      todayClasses: [],
+      todayStatus: 'unavailable',
+      attendanceToday: [],
+      attendanceTodayStatus: 'unavailable',
     })
     renderDashboard()
     expect(screen.getByText('Loading summary')).toBeInTheDocument()
@@ -87,11 +91,51 @@ describe('DashboardPage', () => {
         },
       ],
       upcomingStatus: 'ready',
+      todayClasses: [
+        {
+          id: 'class-1',
+          batch_id: 'batch-1',
+          batch_name: 'Evening Maths',
+          batch_code: 'BAT-000001',
+          class_date: '2026-10-20',
+          start_time: '17:00:00',
+          end_time: '18:00:00',
+          topic: 'Algebra',
+          meet_url: 'https://meet.google.com/abc-defg-hij',
+          meet_status: 'added',
+        },
+      ],
+      todayStatus: 'ready',
+      attendanceToday: [
+        {
+          id: 'class-1',
+          batch_id: 'batch-1',
+          batch_name: 'Evening Maths',
+          class_date: '2026-10-20',
+          start_time: '17:00:00',
+          end_time: '18:00:00',
+          topic: 'Algebra',
+          completion: 'not_recorded',
+          enrolled_count: 2,
+          recorded_count: 0,
+        },
+      ],
+      attendanceTodayStatus: 'ready',
     })
     renderDashboard()
     expect(await screen.findByRole('link', { name: /Total Batches/ })).toHaveAttribute('href', '/app/batches')
     expect(screen.getByRole('link', { name: /Today's Classes/ })).toHaveAttribute('href', '/app/timetable')
-    expect(screen.getByRole('link', { name: /Evening Maths/ })).toHaveAttribute('href', '/app/timetable?date=2026-10-20')
+    expect(screen.getAllByRole('link', { name: /Evening Maths/ }).length).toBeGreaterThan(0)
+    expect(screen.getByRole('link', { name: 'Join meeting' })).toHaveAttribute(
+      'href',
+      'https://meet.google.com/abc-defg-hij',
+    )
+    expect(screen.getByRole('link', { name: 'Join meeting' })).toHaveAttribute('target', '_blank')
+    expect(screen.getByRole('link', { name: 'Join meeting' })).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(screen.getByRole('link', { name: /Not recorded/ })).toHaveAttribute(
+      'href',
+      '/app/attendance?batch=batch-1&class=class-1',
+    )
   })
 
   it('shows an error when the summary cannot be loaded', async () => {
@@ -102,7 +146,7 @@ describe('DashboardPage', () => {
   })
 
   it('shows an empty state when there are no summary items', async () => {
-    vi.mocked(loadDashboardMetrics).mockResolvedValue({ metrics: [], upcoming: [], upcomingStatus: 'empty' })
+    vi.mocked(loadDashboardMetrics).mockResolvedValue({ metrics: [], upcoming: [], upcomingStatus: 'empty', todayClasses: [], todayStatus: 'empty', attendanceToday: [], attendanceTodayStatus: 'empty' })
     renderDashboard()
     expect(await screen.findByText('No summary items are available.')).toBeInTheDocument()
   })

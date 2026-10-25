@@ -238,18 +238,20 @@ def list_classes(
     return list(db.scalars(stmt).all()), total
 
 
-def summary(db: Session) -> tuple[int, list[ScheduledClass]]:
+def summary(db: Session) -> tuple[int, list[ScheduledClass], list[ScheduledClass]]:
     today = coaching_today()
-    today_count = int(
-        db.scalar(
-            select(func.count())
-            .select_from(ScheduledClass)
-            .where(
-                ScheduledClass.status == ClassStatus.SCHEDULED,
-                ScheduledClass.class_date == today,
-            )
-        )
-        or 0
+    today_filters = (
+        ScheduledClass.status == ClassStatus.SCHEDULED,
+        ScheduledClass.class_date == today,
+    )
+    today_count = int(db.scalar(select(func.count()).select_from(ScheduledClass).where(*today_filters)) or 0)
+    today_classes = list(
+        db.scalars(
+            _class_query()
+            .where(*today_filters)
+            .order_by(ScheduledClass.start_time.asc(), ScheduledClass.id.asc())
+            .limit(20)
+        ).all()
     )
     upcoming = list(
         db.scalars(
@@ -262,7 +264,7 @@ def summary(db: Session) -> tuple[int, list[ScheduledClass]]:
             .limit(UPCOMING_LIMIT)
         ).all()
     )
-    return today_count, upcoming
+    return today_count, today_classes, upcoming
 
 
 def next_scheduled_by_batch(db: Session, batch_ids: list[uuid.UUID]) -> dict[uuid.UUID, ScheduledClass]:

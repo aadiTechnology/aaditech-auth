@@ -17,5 +17,19 @@
   "upcomingEmpty": "कोई कक्षा निर्धारित नहीं है।",
   "upcomingUnavailable": "आने वाली कक्षाएँ अभी उपलब्ध नहीं हैं।",
   "upcomingError": "आने वाली कक्षाएँ लोड नहीं हो सकीं।",
-  "classLink": "{{date}} {{time}} {{batch}}"
+  "classLink": "{{date}} {{time}} {{batch}}",
+  "linkAdded": "लिंक जोड़ा गया",
+  "linkMissing": "लिंक नहीं है",
+  "joinMeeting": "मीटिंग में शामिल हों",
+  "todayHeading": "आज की कक्षाएँ",
+  "todayEmpty": "आज कोई कक्षा निर्धारित नहीं है।",
+  "todayUnavailable": "आज की कक्षाएँ अभी उपलब्ध नहीं हैं।",
+  "todayError": "आज की कक्षाएँ लोड नहीं हो सकीं।",
+  "missingLinks_one": "आज 1 कक्षा का मीटिंग लिंक नहीं है।",
+  "missingLinks_other": "आज {{count}} कक्षाओं का मीटिंग लिंक नहीं है।",
+  "attendanceHeading": "आज की हाजिरी",
+  "attendanceLink": "{{batch}} {{time}} · {{status}}",
+  "attendanceEmpty": "आज की कक्षाओं के लिए हाजिरी बाकी नहीं है।",
+  "attendanceUnavailable": "हाजिरी की स्थिति अभी उपलब्ध नहीं है।",
+  "attendanceError": "हाजिरी की स्थिति लोड नहीं हो सकी।"
 }

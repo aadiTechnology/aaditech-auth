@@ -42,9 +42,13 @@ def timetable_summary(
     db: Session = Depends(get_db),
     _: User = Depends(require_permission("timetable.read")),
 ) -> ApiResponse[TimetableSummary]:
-    today_count, upcoming = service.summary(db)
+    today_count, today_classes, upcoming = service.summary(db)
     return ApiResponse(
-        data=TimetableSummary(today_count=today_count, upcoming=[to_upcoming(item) for item in upcoming]),
+        data=TimetableSummary(
+            today_count=today_count,
+            today=[to_upcoming(item) for item in today_classes],
+            upcoming=[to_upcoming(item) for item in upcoming],
+        ),
         message="Success",
     )
 

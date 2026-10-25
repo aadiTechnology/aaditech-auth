@@ -1,5 +1,6 @@
 """Import all models so metadata and Alembic see every table."""
 
+from app.attendance.models import AttendanceRecord
 from app.audit.models import AuditLog
 from app.auth.models import PasswordResetToken, RefreshToken
 from app.batches.models import Batch, BatchStudent
@@ -11,6 +12,7 @@ from app.timetable.models import ScheduledClass
 from app.users.models import User
 
 __all__ = [
+    "AttendanceRecord",
     "AuditLog",
     "Batch",
     "BatchStudent",

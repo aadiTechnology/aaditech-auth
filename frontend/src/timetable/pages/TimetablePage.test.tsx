@@ -27,7 +27,7 @@ const staff: UserProfile = {
   is_active: true,
   email_verified: true,
   roles: ['ADMIN'],
-  permissions: ['timetable.read', 'timetable.create', 'batches.read'],
+  permissions: ['timetable.read', 'timetable.create', 'batches.read', 'meet.read'],
 }
 
 function renderPage() {
@@ -65,6 +65,8 @@ describe('TimetablePage', () => {
             end_time: '18:00:00',
             topic: 'Algebra',
             status: 'scheduled',
+            meet_url: 'https://meet.google.com/abc-defg-hij',
+            meet_status: 'added',
           },
         ],
         total: 1,
@@ -76,6 +78,12 @@ describe('TimetablePage', () => {
     expect(day).toHaveTextContent('17:00–18:00')
     expect(day).toHaveTextContent('Evening Maths')
     expect(day).toHaveTextContent('Algebra')
+    expect(day).toHaveTextContent('Link added')
+    expect(screen.getByRole('link', { name: 'Join meeting' })).toHaveAttribute(
+      'href',
+      'https://meet.google.com/abc-defg-hij',
+    )
+    expect(screen.getByRole('link', { name: 'Join meeting' })).toHaveAttribute('rel', 'noopener noreferrer')
     expect(screen.getByRole('button', { name: 'Add class' })).toBeInTheDocument()
   })
 

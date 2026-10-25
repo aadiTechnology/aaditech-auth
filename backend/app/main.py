@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import JSONResponse
 
+from app.attendance.router import router as attendance_router
 from app.auth.router import router as auth_router
 from app.batches.router import router as batches_router
 from app.common.exceptions import AppError, ErrorCode
@@ -19,6 +20,7 @@ from app.core.csrf import CSRFMiddleware
 from app.core.logging import configure_logging, log_event
 from app.core.security import dummy_password_hash
 from app.core.security_headers import SecurityHeadersMiddleware
+from app.meet.router import router as meet_router
 from app.parents.router import router as parents_router
 from app.permissions.router import router as permissions_router
 from app.roles.router import router as roles_router
@@ -70,6 +72,9 @@ def _validation_details(exc: RequestValidationError) -> list[dict[str, str]]:
         elif "time" in error_type or (field in {"start_time", "end_time"} and error_type != "missing"):
             code = "INVALID_TIME"
             message = "Enter a valid time."
+        elif field == "meet_url":
+            code = "INVALID_URL"
+            message = "Enter a valid Google Meet link."
         elif field == "weekdays" or field.startswith("weekdays"):
             code = "INVALID_WEEKDAY"
             message = "Choose each weekday once."
@@ -97,7 +102,8 @@ def create_app() -> FastAPI:
             "Authorization uses database roles and permissions. "
             "Unsafe requests require an X-CSRF-Token header matching the csrf_token cookie. "
             "Student and parent records are class-register data and are separate from login accounts. "
-            "Class dates and times use Asia/Kolkata wall-clock values."
+            "Class dates and times use Asia/Kolkata wall-clock values. "
+            "Meeting links are stored on scheduled classes. Attendance is recorded by an authorized user."
         ),
         docs_url="/api/docs",
         redoc_url="/api/redoc",
@@ -159,6 +165,8 @@ def create_app() -> FastAPI:
     app.include_router(parents_router, prefix="/api/v1/parents", tags=["Parents"])
     app.include_router(batches_router, prefix="/api/v1/batches", tags=["Batches"])
     app.include_router(timetable_router, prefix="/api/v1/timetable", tags=["Timetable"])
+    app.include_router(meet_router, prefix="/api/v1/meet", tags=["Google Meet"])
+    app.include_router(attendance_router, prefix="/api/v1/attendance", tags=["Attendance"])
     return app
 
 

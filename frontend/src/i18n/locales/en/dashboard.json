@@ -17,5 +17,19 @@
   "upcomingEmpty": "No classes are scheduled.",
   "upcomingUnavailable": "Upcoming classes are not available yet.",
   "upcomingError": "Upcoming classes could not be loaded.",
-  "classLink": "{{date}} {{time}} {{batch}}"
+  "classLink": "{{date}} {{time}} {{batch}}",
+  "linkAdded": "Link added",
+  "linkMissing": "Link missing",
+  "joinMeeting": "Join meeting",
+  "todayHeading": "Today's classes",
+  "todayEmpty": "No classes are scheduled today.",
+  "todayUnavailable": "Today's classes are not available yet.",
+  "todayError": "Today's classes could not be loaded.",
+  "missingLinks_one": "1 class today has no meeting link.",
+  "missingLinks_other": "{{count}} classes today have no meeting link.",
+  "attendanceHeading": "Attendance today",
+  "attendanceLink": "{{batch}} {{time}} · {{status}}",
+  "attendanceEmpty": "No attendance is waiting for today's classes.",
+  "attendanceUnavailable": "Attendance status is not available yet.",
+  "attendanceError": "Attendance status could not be loaded."
 }

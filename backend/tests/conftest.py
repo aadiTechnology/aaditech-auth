@@ -76,7 +76,7 @@ def clean_database() -> None:
     with engine.begin() as connection:
         connection.execute(
             text(
-                "TRUNCATE TABLE scheduled_classes, batch_students, batches, student_parents, "
+                "TRUNCATE TABLE attendance_records, scheduled_classes, batch_students, batches, student_parents, "
                 "students, parents, audit_logs, password_reset_tokens, refresh_tokens, "
                 "user_roles, users CASCADE"
             )

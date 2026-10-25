@@ -27,5 +27,7 @@
   "INVALID_WEEKDAY": "Choose each weekday once.",
   "TOO_MANY": "Choose a shorter range. At most 60 classes can be created at once.",
   "NO_OCCURRENCES": "No classes fall on the selected weekdays in this date range.",
-  "DUPLICATE": "Each student can be selected once."
+  "DUPLICATE": "Each student can be selected once.",
+  "INVALID_URL": "Enter a valid Google Meet link.",
+  "STUDENT_NOT_IN_BATCH": "This student is not enrolled in the selected batch."
 }

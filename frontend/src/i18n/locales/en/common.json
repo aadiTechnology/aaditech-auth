@@ -33,6 +33,7 @@
     "DUPLICATE_LINK": "This parent is already linked to this student.",
     "DUPLICATE_ASSIGNMENT": "This student is already assigned to this batch.",
     "SCHEDULE_CONFLICT": "This class overlaps another class for the same batch.",
-    "NOT_ACTIVE": "Classes can only be scheduled for an active batch."
+    "NOT_ACTIVE": "Classes can only be scheduled for an active batch.",
+    "CLASS_CANCELLED": "This class is cancelled."
   }
 }

@@ -1,0 +1,1 @@
+"""Attendance for scheduled classes."""

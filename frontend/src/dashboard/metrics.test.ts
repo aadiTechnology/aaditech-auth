@@ -21,9 +21,13 @@ describe('loadDashboardMetrics', () => {
       if (path.includes('/batches/')) {
         return { data: { active_count: 2 }, message: 'Success' }
       }
+      if (path.includes('/attendance/')) {
+        return { data: { classes: [] }, message: 'Success' }
+      }
       return {
         data: {
           today_count: 1,
+          today: [],
           upcoming: [
             {
               id: 'class-1',
@@ -60,13 +64,20 @@ describe('loadDashboardMetrics', () => {
         },
       ],
       upcomingStatus: 'ready',
+      todayClasses: [],
+      todayStatus: 'empty',
+      attendanceToday: [],
+      attendanceTodayStatus: 'empty',
     })
   })
 
   it('shows zero when the register and timetable are empty', async () => {
     vi.mocked(api.get).mockImplementation(async (path: string) => {
       if (path.includes('/timetable/')) {
-        return { data: { today_count: 0, upcoming: [] }, message: 'Success' }
+        return { data: { today_count: 0, today: [], upcoming: [] }, message: 'Success' }
+      }
+      if (path.includes('/attendance/')) {
+        return { data: { classes: [] }, message: 'Success' }
       }
       return { data: { active_count: 0 }, message: 'Success' }
     })
@@ -74,6 +85,8 @@ describe('loadDashboardMetrics', () => {
     expect(result.metrics[0]).toEqual({ id: 'students', status: 'ready', value: 0, href: '/app/students' })
     expect(result.metrics[2]).toEqual({ id: 'todayClasses', status: 'ready', value: 0, href: '/app/timetable' })
     expect(result.upcomingStatus).toBe('empty')
+    expect(result.todayStatus).toBe('empty')
+    expect(result.attendanceTodayStatus).toBe('empty')
   })
 
   it('stays unavailable when the user cannot read a module', async () => {
@@ -86,6 +99,8 @@ describe('loadDashboardMetrics', () => {
       'unavailable',
     ])
     expect(result.upcomingStatus).toBe('unavailable')
+    expect(result.todayStatus).toBe('unavailable')
+    expect(result.attendanceTodayStatus).toBe('unavailable')
     expect(result.metrics.every((metric) => metric.value === null)).toBe(true)
   })
 
@@ -97,7 +112,10 @@ describe('loadDashboardMetrics', () => {
       if (path.includes('/batches/')) {
         return { data: { active_count: 3 }, message: 'Success' }
       }
-      return { data: { today_count: 0, upcoming: [] }, message: 'Success' }
+      if (path.includes('/attendance/')) {
+        return { data: { classes: [] }, message: 'Success' }
+      }
+      return { data: { today_count: 0, today: [], upcoming: [] }, message: 'Success' }
     })
     const result = await loadDashboardMetrics()
     expect(result.metrics[0]).toEqual({ id: 'students', status: 'error', value: null, href: '/app/students' })
